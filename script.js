@@ -1,5 +1,7 @@
 const pokedex = document.getElementById('pokedex');
-const pokemonDetails = document.getElementById('pokemon-details'); // Modification ici
+const pokemonDetails = document.getElementById('pokemon-details');
+const pokemonNameMap = {};
+
 
 const fetchPokemon = async () => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=150`;
@@ -9,6 +11,9 @@ const fetchPokemon = async () => {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${index + 1}`);
         const pokemonSpeciesData = await res.json();
         const frenchName = pokemonSpeciesData.names.find(name => name.language.name === "fr").name;
+
+        pokemonNameMap[frenchName] = result.name;
+
         return {
             ...result,
             id: index + 1,
@@ -23,7 +28,7 @@ const fetchPokemon = async () => {
 const displayPokemon = (pokemon) => {
     const pokemonHTMLString = pokemon.map(
         (pokeman) => `
-        <li class="card" onclick="displayDetails('${pokeman.name}')">
+        <li class="card" onclick="displayDetails(${pokeman.id})"> <!-- use pokeman.id instead of pokeman.name -->
             <img class="pokemon-image" src="${pokeman.image}"/>
             <h2 class="pokemon-name">${pokeman.name}</h2>
             <p class="pokemon-number">N°${pokeman.id}</p>
@@ -32,17 +37,20 @@ const displayPokemon = (pokemon) => {
     pokedex.innerHTML = pokemonHTMLString;
 };
 
-const displayDetails = async (pokemonName) => {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+const displayDetails = async (pokemonId) => {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
     const pokeman = await res.json();
-    pokemonDetails.innerHTML = `  // Modification ici
-        <h2>${pokeman.name}</h2>
+    const resSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+    const pokemanSpecies = await resSpecies.json();
+    const frenchName = pokemanSpecies.names.find(name => name.language.name === "fr").name;
+    pokemonDetails.innerHTML = `
+        <h2>${frenchName}</h2>
         <img src="${pokeman.sprites.front_default}"/>
-        <p>Hauteur: ${pokeman.height}</p>
-        <p>Poids: ${pokeman.weight}</p>
+        <p>Hauteur: ${pokeman.height / 10} m</p>
+        <p>Poids: ${pokeman.weight / 10} kg</p>
         <p>Type: ${pokeman.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
-    `;
-}
+    `
+};
 
 fetchPokemon();
 
