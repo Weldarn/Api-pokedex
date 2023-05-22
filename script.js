@@ -46,25 +46,26 @@ const displayDetails = async (pokemonId) => {
     pokemonDetails.innerHTML = `
         <h2>${frenchName}</h2>
         <img src="${pokeman.sprites.front_default}"/>
+        <p>Type: ${pokeman.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
         <p>Hauteur: ${pokeman.height / 10} m</p>
         <p>Poids: ${pokeman.weight / 10} kg</p>
-        <p>Type: ${pokeman.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+        
     `
 };
 
 fetchPokemon();
 
 function searchFunction() {
-    let input, filter, ul, li, a, i, txtValue;
+    let input, filter, ul, li, i, txtValueName, txtValueNumber;
     input = document.getElementById('searchBar');
     filter = input.value.toUpperCase();
     ul = document.getElementById('pokedex');
     li = ul.getElementsByTagName('li');
 
     for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName('h2')[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        txtValueName = li[i].getElementsByClassName('pokemon-name')[0].innerText;
+        txtValueNumber = li[i].getElementsByClassName('pokemon-number')[0].innerText;
+        if (txtValueName.toUpperCase().indexOf(filter) > -1 || txtValueNumber.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = '';
         } else {
             li[i].style.display = 'none';
