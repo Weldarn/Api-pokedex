@@ -5,14 +5,20 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <!-- Conteneur principal -->
     <div class="container">
+        <!-- Conteneur des détails de chaque Pokémon -->
         <div id="details" class="inner-container">
             <h1>Pokemon Details</h1>
+            <!-- Zone où les détails du Pokémon seront affichés -->
             <div id="pokemon-details"></div>
         </div>
+        <!-- Conteneur de la liste de Pokémon -->
         <div id="list" class="inner-container">
             <h1>Pokédex</h1>
+            <!-- Barre de recherche qui appelle la fonction searchFunction -->
             <input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Recherche un Pokémon...">
+            <!-- Zone où la liste des Pokémon sera affichée -->
             <ul id="pokedex"></ul>
         </div>
     </div>
