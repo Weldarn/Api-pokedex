@@ -17,7 +17,38 @@
         <div id="list" class="inner-container">
             <h1>Pokédex</h1>
             <!-- Barre de recherche qui appelle la fonction searchFunction -->
-            <input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Recherche un Pokémon...">
+            <input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Rechercher un Pokémon...">
+            <select id="typeFilter" onchange="filterByTypeFunction()">
+                <option value="">Types</option>
+                <option value="1">Combat</option>
+                <option value="2">Vol</option>
+                <option value="3">Poison</option>
+                <option value="4">Sol</option>
+                <option value="5">Roche</option>
+                <option value="6">Insecte</option>
+                <option value="7">Spectre</option>
+                <option value="8">Acier</option>
+                <option value="9">Feu</option>
+                <option value="10">Eau</option>
+                <option value="11">Plante</option>
+                <option value="12">Electrik</option>
+                <option value="13">Psy</option>
+                <option value="14">Glace</option>
+                <option value="15">Dragon</option>
+                <option value="16">Tenebres</option>
+            </select>
+            <select id="generationFilter" onchange="filterByGenerationFunction()">
+                <option value="0">Générations</option>
+                <option value="1">Première</option>
+                <option value="2">Deuxième</option>
+                <option value="3">Troisième</option>
+                <option value="4">Quatrième</option>
+                <option value="5">Cinquième</option>
+                <option value="6">Sixième</option>
+                <option value="7">Septième</option>
+                <option value="8">Huitième</option>
+                <option value="9">Neuvième</option>
+            </select>
             <!-- Zone où la liste des Pokémon sera affichée -->
             <ul id="pokedex"></ul>
         </div>
