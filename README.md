@@ -12,7 +12,3 @@ Un simple Pokédex construit avec HTML, CSS et JavaScript. Ce Pokédex récupèr
 
 Ouvrez `index.html` dans votre navigateur pour voir le Pokédex en action. 
 
-## Contributeurs
-
-* Weldarn
-
